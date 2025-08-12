@@ -1,0 +1,21 @@
+{
+  "name": "finx-payload-transformer-service-sapi",
+  "root": "apps/finx-payload-transformer-service-sapi",
+  "sourceRoot": "apps/finx-payload-transformer-service-sapi/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :apps:finx-payload-transformer-service-sapi:build"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :apps:finx-payload-transformer-service-sapi:test"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:payload"]
+}

@@ -1,0 +1,84 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'jacoco'
+    id 'org.sonarqube' version '4.0.0.2929'
+}
+
+// get environment values for sonar
+var sonarHostUrl = System.getenv('sonarHostUrl')
+var sonarLogin = System.getenv('sonarLogin')
+var sonarPassword = System.getenv('sonarPassword')
+
+group = 'com.fincuro.payload'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //modelMapper
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
+    //jolt
+    implementation 'com.bazaarvoice.jolt:jolt-core:0.1.5'
+    implementation 'com.bazaarvoice.jolt:json-utils:0.1.5'
+
+    //swagger
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
+
+    //Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar {
+    archiveFileName = "payload-service.jar"
+}
+
+sonar {
+    properties {
+        property 'sonar.host.url', sonarHostUrl
+        property 'sonar.login', sonarLogin
+        property 'sonar.password', sonarPassword
+        property "sonar.java.source", "11"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPaths", "${buildDir}/reports/tests/jacocoTestReport.xml"
+        property 'sonar.coverage.exclusions', "**/com/fincuro/payload/dto/**,**/com/fincuro/payload/entities/**,**/com/fincuro/payload/exception/ErrorResponse**"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        html.required = true
+        xml.required = true
+        xml.destination file("${buildDir}/reports/tests/jacocoTestReport.xml")
+    }
+}
+
+

@@ -1,0 +1,4 @@
+rootProject.name = 'finx-accelerator-microservices'
+
+include 'apps:finx-logger-service-sapi'
+include 'apps:finx-payload-transformer-service-sapi'

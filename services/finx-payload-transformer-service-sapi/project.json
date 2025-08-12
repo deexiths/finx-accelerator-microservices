@@ -26,5 +26,5 @@
       }
     }
   },
-  "tags": ["type:application", "scope:payload"]
+  "tags": ["type:application", "scope:payload", "lang:java"]
 }

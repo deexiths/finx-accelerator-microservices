@@ -26,5 +26,5 @@
       }
     }
   },
-  "tags": ["type:application", "scope:logger"]
+  "tags": ["type:application", "scope:logger", "lang:java"]
 }

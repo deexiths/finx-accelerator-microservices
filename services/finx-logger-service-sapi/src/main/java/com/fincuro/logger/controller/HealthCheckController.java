@@ -22,7 +22,7 @@ public class HealthCheckController {
 
     @GetMapping(value = "/health/check", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HealthStatus> getBuildInfo() {
-        log.info("Calling Health check Controller          ");
+        log.info("Calling Health check Controller");
         final HealthStatus healthStatus = new HealthStatus().setStatus("UP").setActiveProfile(String.join(",", environment.getActiveProfiles()));
         return ResponseEntity.ok(healthStatus);
     }

@@ -1,0 +1,45 @@
+// Common Spring Boot dependencies
+ext.commonDependencies = [
+    // Spring Boot starters
+    'spring-boot-starter-web'        : "org.springframework.boot:spring-boot-starter-web",
+    'spring-boot-starter-validation' : "org.springframework.boot:spring-boot-starter-validation",
+    'spring-boot-starter-actuator'   : "org.springframework.boot:spring-boot-starter-actuator",
+    'spring-boot-devtools'           : "org.springframework.boot:spring-boot-devtools",
+    
+    // Lombok
+    'lombok'                         : "org.projectlombok:lombok:1.18.28",
+    
+    // Testing
+    'spring-boot-starter-test'       : "org.springframework.boot:spring-boot-starter-test",
+    'junit-jupiter'                  : "org.junit.jupiter:junit-jupiter:5.9.3",
+    'mockito-core'                   : "org.mockito:mockito-core:4.11.0"
+]
+
+// Common configurations
+ext.applyCommonConfig = { project ->
+    project.with {
+        java {
+            sourceCompatibility = JavaVersion.VERSION_11
+        }
+        
+        configurations {
+            compileOnly {
+                extendsFrom annotationProcessor
+            }
+        }
+        
+        dependencies {
+            compileOnly commonDependencies['lombok']
+            annotationProcessor commonDependencies['lombok']
+            testImplementation commonDependencies['spring-boot-starter-test']
+            developmentOnly commonDependencies['spring-boot-devtools']
+            implementation commonDependencies['spring-boot-starter-web']
+            implementation commonDependencies['spring-boot-starter-validation']
+            implementation commonDependencies['spring-boot-starter-actuator']
+        }
+        
+        tasks.named('test') {
+            useJUnitPlatform()
+        }
+    }
+}

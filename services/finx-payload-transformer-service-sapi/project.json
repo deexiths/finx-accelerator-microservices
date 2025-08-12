@@ -26,5 +26,6 @@
       }
     }
   },
-  "tags": ["type:application", "scope:payload", "lang:java"]
+  "tags": ["type:application", "scope:payload", "lang:java"],
+  "implicitDependencies": ["shared-java-common"]
 }

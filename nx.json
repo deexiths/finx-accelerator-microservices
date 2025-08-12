@@ -29,10 +29,6 @@
   "affected": {
     "defaultBase": "main"
   },
-  "plugins": [
-    "@nx/gradle",
-    "@nx/node",
-    "@nx/python"
-  ],
+  "plugins": [],
   "nxCloudAccessToken": "NDg5Yzc3NTMtOWU3ZS00ZjcxLWJjYTAtYjZjZDZiMmFhMDRifHJlYWQtd3JpdGU="
 }

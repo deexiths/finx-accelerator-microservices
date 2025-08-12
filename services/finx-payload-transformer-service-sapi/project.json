@@ -1,0 +1,27 @@
+{
+  "name": "finx-payload-transformer-service-sapi",
+  "root": "microservices/finx-payload-transformer-service-sapi",
+  "sourceRoot": "microservices/finx-payload-transformer-service-sapi/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-payload-transformer-service-sapi:build"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-payload-transformer-service-sapi:test"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-payload-transformer-service-sapi:bootRun"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:payload"]
+}

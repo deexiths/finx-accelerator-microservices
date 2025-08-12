@@ -1,0 +1,27 @@
+{
+  "name": "finx-logger-service-sapi",
+  "root": "microservices/finx-logger-service-sapi",
+  "sourceRoot": "microservices/finx-logger-service-sapi/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-logger-service-sapi:build"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-logger-service-sapi:test"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat :microservices:finx-logger-service-sapi:bootRun"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:logger"]
+}

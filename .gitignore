@@ -1,5 +1,56 @@
+# Nx
+.nx/cache
+.nx/workspace-data
+
+# Dependencies
 node_modules/
-.nx/
+*/node_modules/
+
+# Build outputs
 dist/
 build/
+target/
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Language specific
+# Java
+*.class
 .gradle/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

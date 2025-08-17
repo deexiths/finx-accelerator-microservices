@@ -1,0 +1,51 @@
+{
+  "name": "py-demo",
+  "root": "services/py-demo",
+  "sourceRoot": "services/py-demo",
+  "projectType": "application",
+  "targets": {
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m pip install",
+        "cwd": "services/py-demo"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Build completed",
+        "cwd": "services/py-demo"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m pytest tests -v",
+        "cwd": "services/py-demo"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m uvicorn py_demo.api:app --reload --host 0.0.0.0 --port 8000",
+        "cwd": "services/py-demo"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m ruff check .",
+        "cwd": "services/py-demo"
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m black .",
+        "cwd": "services/py-demo"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:demo", "lang:python"]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "finx-accelerator-test-executions",
+  "root": "services/finx-accelerator-test-executions",
+  "sourceRoot": "services/finx-accelerator-test-executions/src",
+  "projectType": "application",
+  "targets": {
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm install",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run build",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm test",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test:watch",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm start",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run dev",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run lint",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:test-executions", "lang:nodejs"]
+}

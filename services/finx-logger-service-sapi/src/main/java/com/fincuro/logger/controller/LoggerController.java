@@ -24,7 +24,7 @@ public class LoggerController {
 
 
     /**
-     * Handlinghhhh incominggg requests to log information based on the provided LoggerRequest.
+     * Handling incoming requests to log information based on the provided LoggerRequest.
      *
      * @param loggerRequest The LoggerRequest object containing log information.
      * @return A ResponseEntity containing a LoggerResponse object indicating the status of the logging operation.

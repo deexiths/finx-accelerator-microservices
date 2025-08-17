@@ -1,0 +1,58 @@
+{
+  "name": "finx-codegen-ui",
+  "root": "services/finx-codegen-ui",
+  "sourceRoot": "services/finx-codegen-ui/src",
+  "projectType": "application",
+  "targets": {
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm install",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run build",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm test",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test:watch",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm start",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run preview",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run lint",
+        "cwd": "services/finx-codegen-ui"
+      }
+    }
+  },
+  "tags": ["type:application", "scope:codegen", "lang:react", "platform:web"]
+}

@@ -1,0 +1,7 @@
+{
+    "DB_HOST":"finx-postgres-dev.cu58to1elcic.ap-south-1.rds.amazonaws.com",
+    "DB_PORT":5432,
+    "DB_USERNAME":"root",
+    "DB_PASSWORD":"yYSZdItx42",
+    "DB_DATABASE":"finx_test_plane"
+}

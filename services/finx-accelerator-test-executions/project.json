@@ -52,6 +52,153 @@
         "command": "npm run lint",
         "cwd": "services/finx-accelerator-test-executions"
       }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rmdir /s /q dist node_modules 2>nul & del package-lock.json 2>nul || echo Clean completed",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "fresh-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm ci",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tsc --noEmit",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t finx-test-executions .",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "audit": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm audit",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test -- --coverage",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "sonar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx sonar-scanner",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "sonar:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx sonar-scanner -Dsonar.host.url=http://localhost:9000",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "security:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm audit --audit-level=moderate",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "security:fix": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm audit fix",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "outdated": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm outdated",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "health": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "curl -f http://localhost:3000/health || echo Service not running",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs -f finx-test-executions || echo Container not running",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs:tail": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs --tail=100 finx-test-executions",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs:error": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-test-executions 2>&1 | findstr /i error",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs:file": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type logs\\app.log | more",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs:npm": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type npm-debug.log | more",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "logs:pm2": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx pm2 logs",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "env:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Environment: && echo NODE_ENV=%NODE_ENV% && echo NODE_VERSION && node --version",
+        "cwd": "services/finx-accelerator-test-executions"
+      }
+    },
+    "quality:gate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx lint finx-accelerator-test-executions",
+          "nx typecheck finx-accelerator-test-executions",
+          "nx test finx-accelerator-test-executions",
+          "nx coverage finx-accelerator-test-executions",
+          "nx security:check finx-accelerator-test-executions"
+        ],
+        "parallel": false,
+        "cwd": "services/finx-accelerator-test-executions"
+      }
     }
   },
   "tags": ["type:application", "scope:test-executions", "lang:nodejs"]

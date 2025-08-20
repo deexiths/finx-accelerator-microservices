@@ -1,8 +1,9 @@
 server:
   port: ${SERVICE_PORT:8080}
 
-
 spring:
   main:
     log-startup-info: OFF
+  profiles:
+    active: ${SPRING_PROFILES}
 

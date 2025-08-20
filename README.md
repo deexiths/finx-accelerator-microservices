@@ -1,13 +1,16 @@
-# Finx Accelerator Microservices
+# Finx Accelerator Platform
 
-A polyglot monorepo supporting Java, Node.js, Python, and other technologies.
+A comprehensive polyglot monorepo supporting web applications, mobile apps, and microservices across Java, Node.js, Python, React, and other technologies.
 
 ## Structure
 
 ```
-├── services/           # All microservices
-│   ├── finx-logger-service-sapi/      # Java Spring Boot service
-│   └── finx-payload-transformer-service-sapi/  # Java Spring Boot service
+├── services/           # All applications and services
+│   ├── finx-logger-service-sapi/      # Java Spring Boot microservice
+│   ├── finx-payload-transformer-service-sapi/  # Java Spring Boot microservice
+│   ├── finx-codegen-ui/               # React web application
+│   ├── finx-accelerator-test-executions/  # Node.js service
+│   └── py-demo/                       # Python FastAPI service
 ├── shared/            # Shared libraries and utilities
 │   ├── java/          # Java shared libraries
 │   ├── nodejs/        # Node.js shared packages
@@ -20,11 +23,13 @@ A polyglot monorepo supporting Java, Node.js, Python, and other technologies.
 
 ## Technologies Supported
 
-- **Java**: Spring Boot services with Gradle
-- **Node.js**: Express/NestJS services with npm/yarn
+- **Java**: Spring Boot microservices with Gradle
+- **React**: Web applications with modern UI frameworks
+- **Node.js**: Backend services and APIs with Express/NestJS
 - **Python**: FastAPI/Django services with pip/poetry
-- **Docker**: Containerization for all services
-- **Nx**: Build orchestration and caching
+- **Mobile**: React Native/Flutter mobile applications
+- **Docker**: Containerization for all applications
+- **Nx**: Build orchestration and caching across all platforms
 
 ## Commands
 

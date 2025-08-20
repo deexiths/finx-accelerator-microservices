@@ -24,6 +24,291 @@
         "command": "gradlew.bat bootRun",
         "cwd": "services/finx-logger-service-sapi"
       }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat clean",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "dependencies": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencies",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t finx-logger-service .",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "docker:run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run -p 8080:8080 finx-logger-service",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat jacocoTestReport",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "sonar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat sonarqube",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "sonar:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat sonarqube -Dsonar.host.url=http://localhost:9000",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "security:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencyCheckAnalyze",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "outdated": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencyUpdates",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "health": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "curl -f http://localhost:8080/actuator/health || echo Service not running",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs -f finx-logger-service || echo Container not running",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:tail": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs --tail=100 finx-logger-service",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:error": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-logger-service 2>&1 | findstr ERROR",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:file": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type logs\\application.log | more",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-logger-service 2>&1 | findstr /i debug",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "env:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Environment: && echo JAVA_HOME=%JAVA_HOME% && echo PATH=%PATH%",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "quality:gate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx test finx-logger-service-sapi",
+          "nx coverage finx-logger-service-sapi",
+          "nx security:check finx-logger-service-sapi"
+        ],
+        "parallel": false,
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "serve:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=dev && gradlew.bat bootRun",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "serve:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=qa && gradlew.bat bootRun",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "serve:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=prod && gradlew.bat bootRun",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:k8s": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-logger-service -n finx-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-logger-service -n finx-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-logger-service -n finx-qa",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-logger-service -n finx-prod",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "argocd:status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app get finx-logger-service-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "argocd:sync": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app sync finx-logger-service-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "build:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=dev && gradlew.bat build",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "build:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=qa && gradlew.bat build",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=prod && gradlew.bat build",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "docker:build:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=dev -t finx-logger-service:dev .",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "docker:build:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=qa -t finx-logger-service:qa .",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "docker:build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=prod -t finx-logger-service:prod .",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "argocd:rollback": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app rollback finx-logger-service-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "argocd:diff": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app diff finx-logger-service-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:k8s:previous": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs deployment/finx-logger-service -n finx-dev --previous",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "logs:pod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl get pods -n finx-dev -l app=finx-logger-service -o name | head -1 | xargs kubectl logs -f -n finx-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "describe:pod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl get pods -n finx-dev -l app=finx-logger-service -o name | head -1 | xargs kubectl describe -n finx-dev",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "deploy:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -f docker-compose.dev.yml up -d",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "deploy:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -f docker-compose.prod.yml up -d",
+        "cwd": "services/finx-logger-service-sapi"
+      }
+    },
+    "undeploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose down",
+        "cwd": "services/finx-logger-service-sapi"
+      }
     }
   },
   "tags": ["type:application", "scope:logger", "lang:java"],

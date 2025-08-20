@@ -1,8 +1,11 @@
 server:
-  port: ${SERVICE_PORT:8080}
+  port: ${SERVICE_PORT:8088}
+
 spring:
+  main:
+    log-startup-info: true
+    banner-mode: console
   profiles:
-    include:
-      - performance
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   application:
-    name: payload Service
+    name: finx-payload-transformer-service

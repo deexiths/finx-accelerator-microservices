@@ -24,6 +24,375 @@
         "command": "gradlew.bat bootRun",
         "cwd": "services/finx-payload-transformer-service-sapi"
       }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat clean",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "dependencies": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencies",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t finx-payload-transformer .",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run -p 8081:8080 finx-payload-transformer",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat jacocoTestReport",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "sonar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat sonarqube",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "sonar:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat sonarqube -Dsonar.host.url=http://localhost:9000",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "security:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencyCheckAnalyze",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "outdated": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat dependencyUpdates",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "health": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "curl -f http://localhost:8081/actuator/health || echo Service not running",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs -f finx-payload-transformer || echo Container not running",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:tail": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs --tail=100 finx-payload-transformer",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:error": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-payload-transformer 2>&1 | findstr ERROR",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:file": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type logs\\application.log | more",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-payload-transformer 2>&1 | findstr /i debug",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "env:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Environment: && echo JAVA_HOME=%JAVA_HOME% && echo PATH=%PATH%",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "quality:gate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx test finx-payload-transformer-service-sapi",
+          "nx coverage finx-payload-transformer-service-sapi",
+          "nx security:check finx-payload-transformer-service-sapi"
+        ],
+        "parallel": false,
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "serve:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=dev && gradlew.bat bootRun",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "serve:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=qa && gradlew.bat bootRun",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "serve:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=prod && gradlew.bat bootRun",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:k8s": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-payload-transformer -n finx-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-payload-transformer -n finx-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-payload-transformer -n finx-qa",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs -f deployment/finx-payload-transformer -n finx-prod",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "argocd:status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app get finx-payload-transformer-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "argocd:sync": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app sync finx-payload-transformer-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "build:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=dev && gradlew.bat build",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "build:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=qa && gradlew.bat build",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES=prod && gradlew.bat build",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:build:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=dev -t finx-payload-transformer:dev .",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:build:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=qa -t finx-payload-transformer:qa .",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build --build-arg SPRING_PROFILES=prod -t finx-payload-transformer:prod .",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:run:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run -d -p 8088:8088 --name finx-payload-transformer-dev finx-payload-transformer:dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:run:qa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run -d -p 8089:8089 --name finx-payload-transformer-qa finx-payload-transformer:qa",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:run:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker run -d -p 8088:8088 --name finx-payload-transformer-prod finx-payload-transformer:prod",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker stop finx-payload-transformer-dev finx-payload-transformer-qa finx-payload-transformer-prod 2>nul || echo Containers stopped",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "docker:remove": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker rm finx-payload-transformer-dev finx-payload-transformer-qa finx-payload-transformer-prod 2>nul || echo Containers removed",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "argocd:rollback": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app rollback finx-payload-transformer-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "argocd:diff": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "argocd app diff finx-payload-transformer-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:k8s:previous": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl logs deployment/finx-payload-transformer -n finx-dev --previous",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "logs:pod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl get pods -n finx-dev -l app=finx-payload-transformer -o name | head -1 | xargs kubectl logs -f -n finx-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "describe:pod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "kubectl get pods -n finx-dev -l app=finx-payload-transformer -o name | head -1 | xargs kubectl describe -n finx-dev",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "deploy:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -f docker-compose.dev.yml up -d",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "deploy:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -f docker-compose.prod.yml up -d",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "undeploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose down",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:main": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat run",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:main:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=dev && gradlew.bat run",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:jar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "java -jar build/libs/finx-payload-transformer-service-sapi.jar",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:jar:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "java -Dspring.profiles.active=dev -jar build/libs/finx-payload-transformer-service-sapi.jar",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:verbose": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "gradlew.bat bootRun --info",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "run:debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set SPRING_PROFILES_ACTIVE=dev && gradlew.bat bootRun --debug",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
+    },
+    "status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Service Status: && curl -s http://localhost:8088/actuator/info || echo Service not running",
+        "cwd": "services/finx-payload-transformer-service-sapi"
+      }
     }
   },
   "tags": ["type:application", "scope:payload", "lang:java"],

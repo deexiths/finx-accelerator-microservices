@@ -45,6 +45,132 @@
         "command": "py -m black .",
         "cwd": "services/py-demo"
       }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rmdir /s /q __pycache__ .pytest_cache dist build 2>nul || echo Clean completed",
+        "cwd": "services/py-demo"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m pytest --cov=py_demo --cov-report=html",
+        "cwd": "services/py-demo"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t py-demo .",
+        "cwd": "services/py-demo"
+      }
+    },
+    "requirements": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m pip freeze > requirements.txt",
+        "cwd": "services/py-demo"
+      }
+    },
+    "sonar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sonar-scanner",
+        "cwd": "services/py-demo"
+      }
+    },
+    "sonar:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sonar-scanner -Dsonar.host.url=http://localhost:9000",
+        "cwd": "services/py-demo"
+      }
+    },
+    "security:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m safety check",
+        "cwd": "services/py-demo"
+      }
+    },
+    "outdated": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "py -m pip list --outdated",
+        "cwd": "services/py-demo"
+      }
+    },
+    "health": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "curl -f http://localhost:8000/health || echo Service not running",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs -f py-demo || echo Container not running",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs:tail": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs --tail=100 py-demo",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs:error": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs py-demo 2>&1 | findstr /i error",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs:file": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type logs\\app.log | more",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs:uvicorn": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type logs\\uvicorn.log | more",
+        "cwd": "services/py-demo"
+      }
+    },
+    "logs:debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs py-demo 2>&1 | findstr /i debug",
+        "cwd": "services/py-demo"
+      }
+    },
+    "env:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Environment: && echo PYTHON_PATH=%PYTHON_PATH% && py --version",
+        "cwd": "services/py-demo"
+      }
+    },
+    "quality:gate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx lint py-demo",
+          "nx format py-demo",
+          "nx test py-demo",
+          "nx coverage py-demo",
+          "nx security:check py-demo"
+        ],
+        "parallel": false,
+        "cwd": "services/py-demo"
+      }
     }
   },
   "tags": ["type:application", "scope:demo", "lang:python"]

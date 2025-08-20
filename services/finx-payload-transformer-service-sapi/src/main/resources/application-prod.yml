@@ -1,0 +1,70 @@
+# Production Environment Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+logging:
+  level:
+    com.finx: WARN
+    org.springframework: ERROR
+    org.hibernate: ERROR
+    org.apache: ERROR
+  file:
+    name: logs/finx-payload-transformer-prod.log
+    max-size: 100MB
+    max-history: 30
+    total-size-cap: 1GB
+
+server:
+  port: ${SERVER_PORT:8081}
+  compression:
+    enabled: true
+  http2:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: finx-payload-transformer-service
+      environment: production
+
+# Production specific configurations
+finx:
+  payload-transformer:
+    debug-mode: false
+    log-transformations: false
+    mock-external-apis: false
+    validation-strict: true
+    performance-monitoring: true
+    security:
+      enabled: true

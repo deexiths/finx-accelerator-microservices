@@ -52,6 +52,138 @@
         "command": "npm run lint",
         "cwd": "services/finx-codegen-ui"
       }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rmdir /s /q build node_modules 2>nul & del package-lock.json 2>nul || echo Clean completed",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "analyze": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test:e2e",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t finx-codegen-ui .",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm test -- --coverage --watchAll=false",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "sonar": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx sonar-scanner",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "sonar:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx sonar-scanner -Dsonar.host.url=http://localhost:9000",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "security:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm audit --audit-level=moderate",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "security:fix": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm audit fix",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "outdated": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm outdated",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "health": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "curl -f http://localhost:3000 || echo Service not running",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "logs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs -f finx-codegen-ui || echo Container not running",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "logs:tail": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs --tail=100 finx-codegen-ui",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "logs:error": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker logs finx-codegen-ui 2>&1 | findstr /i error",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "logs:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "type build.log | more",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "logs:console": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Check browser console for client-side errors",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "env:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo Environment: && echo NODE_ENV=%NODE_ENV% && echo REACT_APP_ENV=%REACT_APP_ENV%",
+        "cwd": "services/finx-codegen-ui"
+      }
+    },
+    "quality:gate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx lint finx-codegen-ui",
+          "nx test finx-codegen-ui",
+          "nx coverage finx-codegen-ui",
+          "nx security:check finx-codegen-ui"
+        ],
+        "parallel": false,
+        "cwd": "services/finx-codegen-ui"
+      }
     }
   },
   "tags": ["type:application", "scope:codegen", "lang:react", "platform:web"]

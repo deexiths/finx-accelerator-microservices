@@ -1,40 +1,45 @@
-# Video Notes: Nx Commands for Finx Accelerator Microservices
+# Video Notes: Nx Commands for Finx Accelerator Platform
 
 ## Video Introduction Script
 
-**"Hello and welcome to this tutorial on the Finx Accelerator Microservices platform!**
+**"Hello and welcome to this tutorial on the Finx Accelerator Platform!**
 
-**In this video, I'll show you how to work with our polyglot monorepo that supports multiple technologies including Java, Node.js, React, and Python - all managed efficiently using Nx.**
+**In this video, I'll show you how to work with our comprehensive polyglot monorepo that supports web applications, mobile apps, and microservices across multiple technologies including Java, Node.js, React, and Python - all managed efficiently using Nx.**
 
 **What you'll learn today:**
-- How to run Spring Boot Java services for backend APIs
-- How to work with Node.js TypeScript services for middleware
-- How to start React applications for frontend interfaces
-- How to execute Python services for data processing
-- How to use Nx commands to manage all services from a single workspace
+- How to run Spring Boot Java microservices for backend APIs
+- How to work with React web applications for user interfaces
+- How to manage Node.js services for middleware and APIs
+- How to execute Python services for data processing and ML
+- How to build and deploy mobile applications
+- How to use Nx commands to manage all applications from a single workspace
 
 **This is a production-ready enterprise architecture that allows teams to:**
-- Share code and libraries across different technologies
+- Build web applications, mobile apps, and microservices in one repository
+- Share code and libraries across different technologies and platforms
 - Run consistent build, test, and deployment processes
-- Scale development with multiple teams working on different services
-- Maintain code quality with unified tooling and standards
+- Scale development with multiple teams working on different applications
+- Maintain code quality with unified tooling and standards across all platforms
 
 **Let's dive in and see how easy it is to work with this powerful setup!"**
 
 ## Overview
-Step-by-step guide for running Java, Node.js, React, and Python services using Nx commands.
+Step-by-step guide for running web applications, mobile apps, and microservices across Java, Node.js, React, and Python using Nx commands.
 
 ## Prerequisites
 - Node.js installed
 - Java JDK installed
 - Python installed
 - Nx CLI installed globally: `npm install -g nx`
+- Docker (for containerization)
+- Mobile development tools (for mobile apps)
 
-## Services Overview
-- **Java Services**: Spring Boot applications
-- **Node.js Services**: Express/NestJS applications  
-- **React Services**: Frontend web applications
-- **Python Services**: FastAPI/Django applications
+## Platform Overview
+- **Java Microservices**: Spring Boot backend services
+- **React Web Apps**: Modern frontend applications
+- **Node.js Services**: API services and middleware
+- **Python Services**: Data processing and ML services
+- **Mobile Apps**: React Native/Flutter applications
 
 ## Step-by-Step Commands
 
